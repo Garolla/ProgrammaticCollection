@@ -6,6 +6,8 @@
 //
 
 import UIKit
+//TODO: import GoogleMaps pod and key. Then uncomment
+//import GoogleMaps
 
 class RestaurantCell: UICollectionViewCell {
     func configureCell(withData data: RestaurantDataForUI?) {
@@ -79,6 +81,27 @@ class RestaurantInfoCell: RestaurantCell {
 }
 
 class RestaurantMapCell: RestaurantCell {
+    //TODO: import GoogleMaps pod and key. Then uncomment
+//    private var mapView: GMSMapView!
+    
+    override func configureCell(withData data: RestaurantDataForUI?) {
+        super.configureCell(withData: data)
+        
+        //TODO: import GoogleMaps pod and key. Then uncomment
+//        mapView = GMSMapView(frame: view.frame)
+//        mapView.settings.myLocationButton = false
+//        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        mapView.isMyLocationEnabled = true
+//        mapView.mapType = .normal
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: data?.data?.gps_lat,
+//                                              longitude: data?.data?.gps_long,
+//                                              zoom: 17.0)
+//
+//        mapView?.camera = camera
+    }
+
+    
     
 }
 
