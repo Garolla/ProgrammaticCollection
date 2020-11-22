@@ -7,16 +7,42 @@
 
 import UIKit
 
+class RestaurantCell: UICollectionViewCell {
+    func configureCell() {
+        self.backgroundColor = .primaryBackground
+    }
+}
+
+class RestaurantPhotoCell: RestaurantCell {
+    static let photosCellId = "RestaurantPhotoCellId"
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
 class RestaurantVC: UIViewController {
     
-    var myCollectionView: UICollectionView?
+    private var myCollectionView: UICollectionView?
     
-    private let photosCellId = "MyCell"
+    private var cellsIds = [RestaurantPhotoCell.photosCellId,
+                            RestaurantPhotoCell.photosCellId,
+                            RestaurantPhotoCell.photosCellId]
+    
+    private var hasCollectionViewBeenCreated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !hasCollectionViewBeenCreated {
+            createCollectionView()
+            hasCollectionViewBeenCreated = true
+        }
     }
     
     private func createCollectionView() {
@@ -27,12 +53,16 @@ class RestaurantVC: UIViewController {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: 60, height: 60)
+        layout.itemSize = CGSize(width: self.view.frame.width, height: self.view.frame.height / 3)
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         
-        myCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: photosCellId)
+        myCollectionView?.register(RestaurantPhotoCell.self, forCellWithReuseIdentifier: RestaurantPhotoCell.photosCellId)
         myCollectionView?.backgroundColor = .secondaryBackground
+        myCollectionView?.isScrollEnabled = true
         
         myCollectionView?.dataSource = self
         myCollectionView?.delegate = self
@@ -45,13 +75,14 @@ class RestaurantVC: UIViewController {
 
 extension RestaurantVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return cellsIds.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: photosCellId, for: indexPath)
-        myCell.backgroundColor = .primaryBackground
-        return myCell
+        let cellId = cellsIds[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! RestaurantCell
+        cell.configureCell()
+        return cell
     }
 }
 
