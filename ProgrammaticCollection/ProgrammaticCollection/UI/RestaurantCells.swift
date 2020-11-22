@@ -28,7 +28,6 @@ class RestaurantPhotoCell: RestaurantCell {
     var heartBtn: RestaurantButton!
     var seeAllBtn: UIButton!
     
-    
     override func configureCell(withData data: RestaurantDataForUI?) {
         super.configureCell(withData: data)
         
@@ -101,6 +100,8 @@ class RestaurantInfoCell: RestaurantCell {
     var mainView: UIView!
     var titleView: UILabel!
     var listViews: [RestaurantListElement]!
+    var theforkView: RestaurantReviewsView!
+    var tripView: RestaurantReviewsView!
     
     private var leftMargin: CGFloat = 26
     
@@ -116,6 +117,9 @@ class RestaurantInfoCell: RestaurantCell {
         addList(text: data?.data?.speciality, image: getAssetsImage(named: "food"), belowView: listViews[0])
         let textPrice = self.getPriceText(currency: data?.data?.currency_code, value: data?.data?.card_price)
         addList(text: textPrice, image: getAssetsImage(named: "cash"), belowView: listViews[1])
+        
+        addTheforkView(numberOfReviews: data?.data?.rate_count, score: data?.data?.avg_rate)
+        addTripView(numberOfReviews: data?.data?.tripadvisor_rate_count, score: data?.data?.tripadvisor_avg_rate)
     }
     
     private func addMainView() {
@@ -149,6 +153,26 @@ class RestaurantInfoCell: RestaurantCell {
         view.image = image
         listViews.append(view)
         mainView.addSubview(view)
+    }
+    
+    private func addTheforkView(numberOfReviews: Int?, score: Double?) {
+        theforkView?.removeFromSuperview()
+        
+        theforkView = RestaurantReviewsView(frame: CGRect(x: leftMargin, y: mainView.frame.maxY - 96, width: self.frame.width / 2 - 48 , height: 80))
+        
+        theforkView.configure(type: .thefork, numberOfReviews: numberOfReviews, score: score)
+        
+        mainView.addSubview(theforkView)
+    }
+    
+    private func addTripView(numberOfReviews: Int?, score: Double?) {
+        tripView?.removeFromSuperview()
+        
+        tripView = RestaurantReviewsView(frame: CGRect(x: leftMargin + theforkView.frame.width + 32, y: mainView.frame.maxY - 96, width: self.frame.width / 2 - 48 , height: 80))
+        
+        tripView.configure(type: .tripadvisor, numberOfReviews: numberOfReviews, score: score)
+        
+        mainView.addSubview(tripView)
     }
     
     private func getPlaceText(address: String?, city: String?, zipcode: String?) -> String {

@@ -17,7 +17,7 @@ struct RestaurantData: Decodable {
     var zipcode: String?
     var currency_code: String?
     var card_price: Int?
-    var tripadvisor_avg_rate: Int?
+    var tripadvisor_avg_rate: Double?
     var tripadvisor_rate_count: Int?
     var avg_rate: Double?
     var rate_count: Int?
