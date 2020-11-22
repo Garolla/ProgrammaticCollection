@@ -11,6 +11,5 @@ class RestaurantButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = CGFloat(self.frame.height) * 0.5
-        self.backgroundColor = .primary
     }
 }

@@ -21,6 +21,11 @@
 		4B14088C256AE177007F5BF1 /* RestaurantDataForUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B14088B256AE177007F5BF1 /* RestaurantDataForUI.swift */; };
 		4B140894256AE781007F5BF1 /* RestaurantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B140893256AE781007F5BF1 /* RestaurantButton.swift */; };
 		4B14089B256AE9EF007F5BF1 /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B14089A256AE9EF007F5BF1 /* Palette.xcassets */; };
+		4B1408A6256AEBD4007F5BF1 /* Restaurant.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B1408A5256AEBD4007F5BF1 /* Restaurant.xcassets */; };
+		4B1408AB256AF1CC007F5BF1 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1408AA256AF1CC007F5BF1 /* Extensions+UIView.swift */; };
+		4B1408B0256AF2BC007F5BF1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1408AF256AF2BC007F5BF1 /* Constants.swift */; };
+		4B1408B5256AF9AD007F5BF1 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1408B4256AF9AD007F5BF1 /* Fonts.swift */; };
+		4B1408BA256AFAF5007F5BF1 /* RestaurantListElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1408B9256AFAF5007F5BF1 /* RestaurantListElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,11 @@
 		4B14088B256AE177007F5BF1 /* RestaurantDataForUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDataForUI.swift; sourceTree = "<group>"; };
 		4B140893256AE781007F5BF1 /* RestaurantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantButton.swift; sourceTree = "<group>"; };
 		4B14089A256AE9EF007F5BF1 /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
+		4B1408A5256AEBD4007F5BF1 /* Restaurant.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Restaurant.xcassets; sourceTree = "<group>"; };
+		4B1408AA256AF1CC007F5BF1 /* Extensions+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		4B1408AF256AF2BC007F5BF1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4B1408B4256AF9AD007F5BF1 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		4B1408B9256AFAF5007F5BF1 /* RestaurantListElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +157,9 @@
 			children = (
 				4B14082D256AA297007F5BF1 /* RestaurantVC.swift */,
 				4B140893256AE781007F5BF1 /* RestaurantButton.swift */,
+				4B1408B9256AFAF5007F5BF1 /* RestaurantListElement.swift */,
+				4B1408A5256AEBD4007F5BF1 /* Restaurant.xcassets */,
+				4B1408AA256AF1CC007F5BF1 /* Extensions+UIView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -165,6 +178,8 @@
 				4B14089A256AE9EF007F5BF1 /* Palette.xcassets */,
 				4B140877256AA734007F5BF1 /* Palette.swift */,
 				4B14087C256AA8F3007F5BF1 /* Utils.swift */,
+				4B1408AF256AF2BC007F5BF1 /* Constants.swift */,
+				4B1408B4256AF9AD007F5BF1 /* Fonts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -282,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B140836256AA298007F5BF1 /* LaunchScreen.storyboard in Resources */,
+				4B1408A6256AEBD4007F5BF1 /* Restaurant.xcassets in Resources */,
 				4B140833256AA298007F5BF1 /* Assets.xcassets in Resources */,
 				4B14089B256AE9EF007F5BF1 /* Palette.xcassets in Resources */,
 				4B140831256AA297007F5BF1 /* Main.storyboard in Resources */,
@@ -311,10 +327,14 @@
 			files = (
 				4B14087D256AA8F3007F5BF1 /* Utils.swift in Sources */,
 				4B14082E256AA297007F5BF1 /* RestaurantVC.swift in Sources */,
+				4B1408AB256AF1CC007F5BF1 /* Extensions+UIView.swift in Sources */,
 				4B140883256AD860007F5BF1 /* RestaurantData.swift in Sources */,
 				4B14086C256AA582007F5BF1 /* RestaurantManager.swift in Sources */,
+				4B1408BA256AFAF5007F5BF1 /* RestaurantListElement.swift in Sources */,
+				4B1408B0256AF2BC007F5BF1 /* Constants.swift in Sources */,
 				4B14088C256AE177007F5BF1 /* RestaurantDataForUI.swift in Sources */,
 				4B14082A256AA297007F5BF1 /* AppDelegate.swift in Sources */,
+				4B1408B5256AF9AD007F5BF1 /* Fonts.swift in Sources */,
 				4B140894256AE781007F5BF1 /* RestaurantButton.swift in Sources */,
 				4B140878256AA734007F5BF1 /* Palette.swift in Sources */,
 			);

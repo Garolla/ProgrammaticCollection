@@ -5,7 +5,7 @@
 //  Created by Emanuele Garolla on 22/11/2020.
 //
 
-import Foundation
+import UIKit
 
 func mainThread(_ block: () -> Void) {
     if !Thread.isMainThread {
@@ -15,6 +15,11 @@ func mainThread(_ block: () -> Void) {
     } else {
         block()
     }
+}
+
+func getAssetsImage(named: String?) -> UIImage? {
+    guard let named = named else { return nil }
+    return UIImage(named: named, in: Bundle.main, compatibleWith: nil)
 }
 
 func log<T>(_ value: T, file: StaticString = #file, line: UInt = #line) {
@@ -33,3 +38,4 @@ private func actualLog<T>(_ value: T, file: StaticString, line: UInt) {
 
     print(stringToLog)
 }
+
