@@ -9,7 +9,7 @@ import UIKit
 
 class RestaurantCell: UICollectionViewCell {
     
-    func configureCell(withData: RestaurantData?) {
+    func configureCell(withData: RestaurantDataForUI?) {
         self.backgroundColor = .primaryBackground
     }
 }
@@ -30,7 +30,7 @@ class RestaurantVC: UIViewController {
                             RestaurantPhotoCell.photosCellId,
                             RestaurantPhotoCell.photosCellId]
     
-    private var restaurantData: RestaurantData?
+    private var restaurantData = RestaurantDataForUI(data: nil, firstImage: nil)
     
     private var hasCollectionViewBeenCreated = false
     
@@ -47,14 +47,7 @@ class RestaurantVC: UIViewController {
             hasCollectionViewBeenCreated = true
         }
         
-        restaurantManager.getRestaurant { [weak self] (data, error) in
-            log("RestaurantVC: getRestaurant response arrived")
-            if data != nil {
-                log("RestaurantVC: getRestaurant restaurantData is NOT nil")
-                self?.restaurantData = data
-            }
-            self?.myCollectionView?.reloadData()
-        }
+        getDataForUI()
     }
     
     private func createCollectionView() {
@@ -81,6 +74,27 @@ class RestaurantVC: UIViewController {
         view.addSubview(myCollectionView ?? UICollectionView())
         
         self.view = view
+    }
+    
+    private func getDataForUI() {
+        restaurantManager.getRestaurant { [weak self] (data, error) in
+            log("RestaurantVC: getRestaurant response arrived")
+            if data != nil {
+                log("RestaurantVC: getRestaurant restaurantData is NOT nil")
+                self?.restaurantData.data = data
+                self?.myCollectionView?.reloadData()
+            }
+            
+            //First data to fill UI has arrived, now i need to get the first pic
+            if let firstPic = data?.pics_diaporama?.first, let url = URL(string: firstPic) {
+                restaurantManager.getRestaurantImage(imageURL: url) { (image, error) in
+                    if image != nil {
+                        self?.restaurantData.firstImage = image
+                        self?.myCollectionView?.reloadData()
+                    }
+                }
+            }
+        }
     }
 
 }
