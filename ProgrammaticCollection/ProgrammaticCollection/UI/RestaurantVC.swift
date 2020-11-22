@@ -11,7 +11,7 @@ import UIKit
 
 class RestaurantCell: UICollectionViewCell {
     func configureCell(withData data: RestaurantDataForUI?) {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 }
 
@@ -23,6 +23,7 @@ class RestaurantPhotoCell: RestaurantCell {
         
         mainImageView = UIImageView(frame: self.frame)
         mainImageView.image = data?.firstImage
+        mainImageView.contentMode = .scaleAspectFill
         self.addSubview(mainImageView)
     }
 }
@@ -32,7 +33,7 @@ class RestaurantInfoCell: RestaurantCell {
     var titleView: UILabel!
     var listViews: [RestaurantListElement]!
     
-    private var leftMargin: CGFloat = 32
+    private var leftMargin: CGFloat = 26
     
     override func configureCell(withData data: RestaurantDataForUI?) {
         super.configureCell(withData: data)
@@ -41,16 +42,18 @@ class RestaurantInfoCell: RestaurantCell {
         addTitle(data?.data?.name)
         
         listViews = []
-        addList(text: data?.data?.speciality, image: getAssetsImage(named: "location"), belowView: titleView)
+        let textPlace = self.getPlaceText(address: data?.data?.address, city: data?.data?.city, zipcode: data?.data?.zipcode)
+        addList(text: textPlace, image: getAssetsImage(named: "location"), belowView: titleView)
         addList(text: data?.data?.speciality, image: getAssetsImage(named: "food"), belowView: listViews[0])
-        addList(text: data?.data?.speciality, image: getAssetsImage(named: "cash"), belowView: listViews[1])
+        let textPrice = self.getPriceText(currency: data?.data?.currency_code, value: data?.data?.card_price)
+        addList(text: textPrice, image: getAssetsImage(named: "cash"), belowView: listViews[1])
     }
     
     private func addMainView() {
         mainView?.removeFromSuperview()
         
         mainView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height - 16))
-        mainView.backgroundColor = .green
+        mainView.backgroundColor = .primaryBackground
         
         mainView.roundCorners([.bottomLeft, .bottomRight], radius: Constants.Radius.cardCornerRadius)
         //FIXME: Shadow not working properly
@@ -72,11 +75,26 @@ class RestaurantInfoCell: RestaurantCell {
     }
     
     private func addList(text: String?, image: UIImage?, belowView: UIView) {
-        let view = RestaurantListElement(frame: CGRect(x: leftMargin, y: belowView.frame.maxY, width: self.frame.width, height: 60))
+        let view = RestaurantListElement(frame: CGRect(x: leftMargin, y: belowView.frame.maxY, width: self.frame.width, height: 40))
         view.text = text
         view.image = image
         listViews.append(view)
         mainView.addSubview(view)
+    }
+    
+    private func getPlaceText(address: String?, city: String?, zipcode: String?) -> String {
+        if let address = address, let city = city, let zipcode = zipcode {
+            return "\(address), \(city) \(zipcode)"
+        }
+        return "Address N/A"
+    }
+    
+    private func getPriceText(currency: String?, value: Int?) -> String {
+        if let currency = currency, let value = value {
+            //TODO: Convert currency in symbol
+            return "Average price \(currency)\(value)"
+        }
+        return "Average price N/A"
     }
 }
 
