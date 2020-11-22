@@ -21,7 +21,7 @@ class RestaurantManager {
             
             downloadSession.dataTask(with: url,
                                      completionHandler: { data, response, error in
-                                        log("RestaurantManager: data \(String(describing: data)), response : \(String(describing: response)), error \(String(describing: error))")
+                                        log("data \(String(describing: data)), response : \(String(describing: response)), error \(String(describing: error))")
                                         completion(RestaurantData(fromData: data), error)
             }).resume()
         }
@@ -33,7 +33,7 @@ class RestaurantManager {
             
             downloadSession.dataTask(with: url,
                                      completionHandler: { data, response, error in
-                                        log("RestaurantManager: data \(String(describing: data)), response : \(String(describing: response)), error \(String(describing: error))")
+                                        log("data \(String(describing: data)), response : \(String(describing: response)), error \(String(describing: error))")
                                         var image: UIImage?
                                         if let data = data {
                                             image = UIImage(data: data)

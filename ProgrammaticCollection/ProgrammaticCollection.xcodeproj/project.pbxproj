@@ -19,6 +19,8 @@
 		4B14087D256AA8F3007F5BF1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B14087C256AA8F3007F5BF1 /* Utils.swift */; };
 		4B140883256AD860007F5BF1 /* RestaurantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B140882256AD860007F5BF1 /* RestaurantData.swift */; };
 		4B14088C256AE177007F5BF1 /* RestaurantDataForUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B14088B256AE177007F5BF1 /* RestaurantDataForUI.swift */; };
+		4B140894256AE781007F5BF1 /* RestaurantButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B140893256AE781007F5BF1 /* RestaurantButton.swift */; };
+		4B14089B256AE9EF007F5BF1 /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B14089A256AE9EF007F5BF1 /* Palette.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		4B14087C256AA8F3007F5BF1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4B140882256AD860007F5BF1 /* RestaurantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantData.swift; sourceTree = "<group>"; };
 		4B14088B256AE177007F5BF1 /* RestaurantDataForUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDataForUI.swift; sourceTree = "<group>"; };
+		4B140893256AE781007F5BF1 /* RestaurantButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantButton.swift; sourceTree = "<group>"; };
+		4B14089A256AE9EF007F5BF1 /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				4B14082D256AA297007F5BF1 /* RestaurantVC.swift */,
+				4B140893256AE781007F5BF1 /* RestaurantButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 		4B140870256AA638007F5BF1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4B14089A256AE9EF007F5BF1 /* Palette.xcassets */,
 				4B140877256AA734007F5BF1 /* Palette.swift */,
 				4B14087C256AA8F3007F5BF1 /* Utils.swift */,
 			);
@@ -277,6 +283,7 @@
 			files = (
 				4B140836256AA298007F5BF1 /* LaunchScreen.storyboard in Resources */,
 				4B140833256AA298007F5BF1 /* Assets.xcassets in Resources */,
+				4B14089B256AE9EF007F5BF1 /* Palette.xcassets in Resources */,
 				4B140831256AA297007F5BF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +315,7 @@
 				4B14086C256AA582007F5BF1 /* RestaurantManager.swift in Sources */,
 				4B14088C256AE177007F5BF1 /* RestaurantDataForUI.swift in Sources */,
 				4B14082A256AA297007F5BF1 /* AppDelegate.swift in Sources */,
+				4B140894256AE781007F5BF1 /* RestaurantButton.swift in Sources */,
 				4B140878256AA734007F5BF1 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

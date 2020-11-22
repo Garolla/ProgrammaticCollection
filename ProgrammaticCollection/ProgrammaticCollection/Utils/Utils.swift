@@ -29,7 +29,7 @@ private func actualLog<T>(_ value: T, file: StaticString, line: UInt) {
     formatter.timeZone = TimeZone(abbreviation: "CET")
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
     let date = formatter.string(from: Date())
-    let stringToLog = "^ [\(date) \(fileName):\(line)] - \(value)"
+    let stringToLog = "^ [\(date)] \(fileName):\(line) - \(value)"
 
     print(stringToLog)
 }

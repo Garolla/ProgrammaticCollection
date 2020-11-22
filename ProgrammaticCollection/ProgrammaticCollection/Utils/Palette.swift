@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor {
+    static let primary = UIColor(named: "tripadvisor_green")
     static let primaryBackground = UIColor.red
     static let secondaryBackground = UIColor.lightGray
 }

@@ -9,30 +9,47 @@ import UIKit
 
 class RestaurantCell: UICollectionViewCell {
     
-    func configureCell(withData: RestaurantDataForUI?) {
+    func configureCell(withData data: RestaurantDataForUI?) {
         self.backgroundColor = .primaryBackground
     }
 }
 
 class RestaurantPhotoCell: RestaurantCell {
-    static let photosCellId = "RestaurantPhotoCellId"
+    static let cellId = "RestaurantPhotoCellId"
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    var mainImageView: UIImageView!
+    
+    override func configureCell(withData data: RestaurantDataForUI?) {
+        super.configureCell(withData: data)
+        
+        mainImageView = UIImageView(frame: self.frame)
+        mainImageView.image = data?.firstImage
+        self.addSubview(mainImageView)
     }
+}
+
+class RestaurantInfoCell: RestaurantCell {
+    static let cellId = "RestaurantInfoCellId"
+    
+}
+
+class RestaurantMapCell: RestaurantCell {
+    static let cellId = "RestaurantMapCellId"
+    
 }
 
 class RestaurantVC: UIViewController {
     
-    private var myCollectionView: UICollectionView?
+    private var myCollectionView: UICollectionView!
+    private var bottonBtn: RestaurantButton!
     
-    private var cellsIds = [RestaurantPhotoCell.photosCellId,
-                            RestaurantPhotoCell.photosCellId,
-                            RestaurantPhotoCell.photosCellId]
+    private var cellsIds = [RestaurantPhotoCell.cellId,
+                            RestaurantInfoCell.cellId,
+                            RestaurantMapCell.cellId]
     
     private var restaurantData = RestaurantDataForUI(data: nil, firstImage: nil)
     
-    private var hasCollectionViewBeenCreated = false
+    private var hasUIBeenCreated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +59,11 @@ class RestaurantVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !hasCollectionViewBeenCreated {
+        //UI created in will appear to tuckle potentials frame issues
+        if !hasUIBeenCreated {
             createCollectionView()
-            hasCollectionViewBeenCreated = true
+            createBottonBtn()
+            hasUIBeenCreated = true
         }
         
         getDataForUI()
@@ -65,22 +84,36 @@ class RestaurantVC: UIViewController {
         
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         
-        myCollectionView?.register(RestaurantPhotoCell.self, forCellWithReuseIdentifier: RestaurantPhotoCell.photosCellId)
-        myCollectionView?.backgroundColor = .secondaryBackground
-        myCollectionView?.isScrollEnabled = true
+        for id in cellsIds {
+            myCollectionView.register(RestaurantPhotoCell.self, forCellWithReuseIdentifier: id)
+        }
         
-        myCollectionView?.dataSource = self
-        myCollectionView?.delegate = self
+        myCollectionView.backgroundColor = .secondaryBackground
+        myCollectionView.isScrollEnabled = true
+        
+        myCollectionView.dataSource = self
+        myCollectionView.delegate = self
         view.addSubview(myCollectionView ?? UICollectionView())
         
         self.view = view
     }
     
+    private func createBottonBtn() {
+        bottonBtn = RestaurantButton(frame: CGRect(x: 16, y: self.view.frame.height - 88, width: self.view.frame.width - 32, height: 44))
+        bottonBtn.setTitle("Book a table", for: .normal)
+        bottonBtn.addTarget(self, action:#selector(bottonBtnAction), for: .touchUpInside)
+        self.view.addSubview(bottonBtn)
+    }
+    
+    @objc func bottonBtnAction() {
+        log("User tapped bottonBtnAction")
+    }
+    
     private func getDataForUI() {
         restaurantManager.getRestaurant { [weak self] (data, error) in
-            log("RestaurantVC: getRestaurant response arrived")
+            log("getRestaurant response arrived")
             if data != nil {
-                log("RestaurantVC: getRestaurant restaurantData is NOT nil")
+                log("getRestaurant restaurantData is NOT nil")
                 self?.restaurantData.data = data
                 self?.myCollectionView?.reloadData()
             }
@@ -114,6 +147,6 @@ extension RestaurantVC: UICollectionViewDataSource {
 
 extension RestaurantVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       log("User tapped on item \(indexPath.row)")
+       log("User tapped item \(indexPath.row)")
     }
 }
