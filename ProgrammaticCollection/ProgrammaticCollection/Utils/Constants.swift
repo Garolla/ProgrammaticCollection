@@ -10,6 +10,7 @@ import UIKit
 struct Constants {
     struct Radius {
         static let cardCornerRadius: CGFloat = 12
+        static let secondaryCornerRadius: CGFloat = 6
     }
 
     struct Shadows {

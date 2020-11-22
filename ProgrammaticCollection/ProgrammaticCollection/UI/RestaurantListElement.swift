@@ -51,7 +51,7 @@ class RestaurantListElement: UIView {
         
         imageContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
         imageContainerView.backgroundColor = .tertiaryBackground
-        imageContainerView.roundCorners([.allCorners], radius: 6)
+        imageContainerView.roundCorners([.allCorners], radius: Constants.Radius.secondaryCornerRadius)
         
         imageView = UIImageView(frame: CGRect(x: 4, y: 4, width: 24, height: 24))
         imageView.contentMode = .scaleAspectFit

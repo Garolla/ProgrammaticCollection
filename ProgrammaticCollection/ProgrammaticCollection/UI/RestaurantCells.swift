@@ -8,11 +8,14 @@
 import UIKit
 //TODO: import GoogleMaps pod and key. Then uncomment
 //import GoogleMaps
+
 protocol RestaurantCellDelegate: class {
     func shareBtnPressed()
     func heartBtnPressed()
+    func seeAllBtnPressed()
 }
 class RestaurantCell: UICollectionViewCell {
+    weak var delegate: RestaurantCellDelegate?
     
     func configureCell(withData data: RestaurantDataForUI?) {
         self.backgroundColor = .clear
@@ -21,13 +24,18 @@ class RestaurantCell: UICollectionViewCell {
 
 class RestaurantPhotoCell: RestaurantCell {
     var mainImageView: UIImageView!
-    var shareBtn: UIButton!
+    var shareBtn: RestaurantButton!
+    var heartBtn: RestaurantButton!
+    var seeAllBtn: UIButton!
+    
     
     override func configureCell(withData data: RestaurantDataForUI?) {
         super.configureCell(withData: data)
         
         addImageView(withImage: data?.firstImage)
         createShareBtn()
+        createHeartBtn()
+        createSeeAllBtn(numOfPictures: data?.data?.pics_diaporama?.count ?? 0)
     }
     
     private func addImageView(withImage image: UIImage?) {
@@ -42,15 +50,50 @@ class RestaurantPhotoCell: RestaurantCell {
     private func createShareBtn() {
         shareBtn?.removeFromSuperview()
         
-        shareBtn = RestaurantButton(frame: CGRect(x: self.frame.width - 48, y: 16, width: 32, height: 32))
+        shareBtn = RestaurantButton(frame: CGRect(x: self.frame.width - 48 - 48, y: 16, width: 32, height: 32))
         shareBtn.setImage(getAssetsImage(named: "share"), for: .normal)
         shareBtn.addTarget(self, action:#selector(shareBtnAction), for: .touchUpInside)
-        shareBtn.backgroundColor = .primary
+        shareBtn.backgroundColor = .quartiaryBackground
+        shareBtn.alpha = 0.6
         self.addSubview(shareBtn)
+    }
+    
+    private func createHeartBtn() {
+        heartBtn?.removeFromSuperview()
+        
+        heartBtn = RestaurantButton(frame: CGRect(x: self.frame.width - 48, y: 16, width: 32, height: 32))
+        heartBtn.setImage(getAssetsImage(named: "solid-heart"), for: .normal)
+        heartBtn.addTarget(self, action:#selector(heartBtnAction), for: .touchUpInside)
+        heartBtn.backgroundColor = .quartiaryBackground
+        heartBtn.alpha = 0.6
+        self.addSubview(heartBtn)
+    }
+    
+    private func createSeeAllBtn(numOfPictures: Int) {
+        seeAllBtn?.removeFromSuperview()
+        
+        seeAllBtn = UIButton(frame: CGRect(x: 32, y: self.frame.height - 48, width: 160, height: 32))
+        seeAllBtn.setTitle("See all \(numOfPictures) photos >", for: .normal)
+        seeAllBtn.addTarget(self, action:#selector(seeAllBtnAction), for: .touchUpInside)
+        seeAllBtn.backgroundColor = .quartiaryBackground
+        seeAllBtn.alpha = 0.6
+        seeAllBtn.roundCorners([.allCorners], radius: Constants.Radius.secondaryCornerRadius)
+        self.addSubview(seeAllBtn)
     }
     
     @objc func shareBtnAction() {
         log("User tapped shareBtnAction")
+        delegate?.shareBtnPressed()
+    }
+    
+    @objc func heartBtnAction() {
+        log("User tapped shareBtnAction")
+        delegate?.heartBtnPressed()
+    }
+    
+    @objc func seeAllBtnAction() {
+        log("User tapped shareBtnAction")
+        delegate?.seeAllBtnPressed()
     }
 }
 

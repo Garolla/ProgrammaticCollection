@@ -114,6 +114,7 @@ extension RestaurantVC: UICollectionViewDataSource {
         let cellType = cellsTypes[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.description(), for: indexPath) as! RestaurantCell
         cell.configureCell(withData: restaurantData)
+        cell.delegate = self
         return cell
     }
 }
@@ -122,4 +123,12 @@ extension RestaurantVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        log("User tapped item \(indexPath.row)")
     }
+}
+
+extension RestaurantVC: RestaurantCellDelegate {
+    func shareBtnPressed() {}
+    
+    func heartBtnPressed() {}
+    
+    func seeAllBtnPressed() {}
 }

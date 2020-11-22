@@ -13,4 +13,5 @@ extension UIColor {
     static let primaryBackground = UIColor.white
     static let secondaryBackground = UIColor(named: "tripadvisor_gray")
     static let tertiaryBackground = UIColor(named: "tripadvisor_light_green")
+    static let quartiaryBackground = UIColor.black
 }
