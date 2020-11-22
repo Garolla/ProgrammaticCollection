@@ -8,7 +8,8 @@
 import UIKit
 
 class RestaurantCell: UICollectionViewCell {
-    func configureCell() {
+    
+    func configureCell(withData: RestaurantData?) {
         self.backgroundColor = .primaryBackground
     }
 }
@@ -29,6 +30,8 @@ class RestaurantVC: UIViewController {
                             RestaurantPhotoCell.photosCellId,
                             RestaurantPhotoCell.photosCellId]
     
+    private var restaurantData: RestaurantData?
+    
     private var hasCollectionViewBeenCreated = false
     
     override func viewDidLoad() {
@@ -42,6 +45,15 @@ class RestaurantVC: UIViewController {
         if !hasCollectionViewBeenCreated {
             createCollectionView()
             hasCollectionViewBeenCreated = true
+        }
+        
+        restaurantManager.getRestaurant { [weak self] (data, error) in
+            log("RestaurantVC: getRestaurant response arrived")
+            if data != nil {
+                log("RestaurantVC: getRestaurant restaurantData is NOT nil")
+                self?.restaurantData = data
+            }
+            self?.myCollectionView?.reloadData()
         }
     }
     
@@ -81,7 +93,7 @@ extension RestaurantVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellId = cellsIds[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! RestaurantCell
-        cell.configureCell()
+        cell.configureCell(withData: restaurantData)
         return cell
     }
 }
