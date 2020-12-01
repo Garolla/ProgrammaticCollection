@@ -41,7 +41,6 @@ class RestaurantVC: UIViewController {
     
     //MARK: UI
     private func createCollectionView() {
-        super.viewDidLoad()
         
         let view = UIView()
         view.backgroundColor = .secondaryBackground
